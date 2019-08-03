@@ -1,6 +1,10 @@
 package com.travelmantics;
 
-public class TravelDeal {
+import java.io.Serializable;
+
+//to make it possible for TravelDeal objects to be passed using intentextra we implement
+// the serializable interface
+public class TravelDeal implements Serializable {
     private String ID;
     private  String title;
     private  String price;

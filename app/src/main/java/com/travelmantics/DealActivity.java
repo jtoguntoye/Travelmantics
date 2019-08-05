@@ -26,8 +26,6 @@ public class DealActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_insert);
-        FirebaseUtil.dbreference("traveldeals",this);
-
         mFirebaseDatabase = FirebaseUtil.mFirebaseDatabase;
         mDatabaseReference =FirebaseUtil.mDatabaseReference;
         TxtTitle = findViewById(R.id.EdittxtTitle);
@@ -94,13 +92,32 @@ public class DealActivity extends AppCompatActivity {
         TxtDescription.setText("");
         TxtTitle.requestFocus();
     }
+    private void enableEditTexts(boolean isEnabled){
+        TxtTitle.setEnabled(isEnabled);
+        TxtDescription.setEnabled(isEnabled);
+        TxtPrice.setEnabled(isEnabled);
+
+    }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.save_menu, menu);
-    return true;}
+        if(FirebaseUtil.isAdmin){
+            menu.findItem(R.id.delete_deal).setVisible(true);
+            menu.findItem(R.id.save_menu).setVisible(true);
+            enableEditTexts(true);
+        }
+        else{
+            menu.findItem(R.id.delete_deal).setVisible(false);
+            menu.findItem(R.id.save_menu).setVisible(false);
+            enableEditTexts(false);
+        }
+
+
+    return true;
+    }
 }
 
 

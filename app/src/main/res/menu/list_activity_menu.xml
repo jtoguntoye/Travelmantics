@@ -6,5 +6,7 @@
         android:id="@+id/insert_menu"
         android:title="@string/new_travel_deals"
         ></item>
-
+<item app:showAsAction="never"
+    android:id="@+id/log_out"
+    android:title="Log out"></item>
 </menu>

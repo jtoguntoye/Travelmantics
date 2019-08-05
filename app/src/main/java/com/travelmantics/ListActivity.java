@@ -14,6 +14,9 @@ import android.view.MenuItem;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.firebase.ui.auth.AuthUI;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -64,7 +67,13 @@ public class ListActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.list_activity_menu, menu);
-
+        MenuItem insertMenu = menu.findItem(R.id.insert_menu);
+        if(FirebaseUtil.isAdmin == true){
+            insertMenu.setVisible(true);
+        }
+        else{
+            insertMenu.setVisible(false);
+        }
         return true;
     }
 
@@ -75,9 +84,26 @@ public class ListActivity extends AppCompatActivity {
                 Intent intent = new Intent(this, DealActivity.class);
                 startActivity(intent);
                 return true;
+            case R.id.log_out:
+                //attach logout functionality to the listActivity
+                AuthUI.getInstance()
+                        .signOut(this)
+                        .addOnCompleteListener(new OnCompleteListener<Void>() {
+                            public void onComplete(@NonNull Task<Void> task) {
+                                FirebaseUtil.AttachListener();
+                            }
+                        });
+                FirebaseUtil.DetachListener();
+                return true;
         }
         return super.onOptionsItemSelected(item);
         }
+
+        public void showMenu(){
+        invalidateOptionsMenu();// used to indicate to android that the content of the menu
+                                //has changed and the menu should be redrawn
+        }
+
 
     }
 

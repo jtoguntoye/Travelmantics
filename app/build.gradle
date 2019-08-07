@@ -33,6 +33,11 @@ dependencies {
     //dependency for firebase storage
     implementation 'com.google.firebase:firebase-storage:18.1.0'
 
+    //dependency for picasso library
+    implementation ('com.squareup.picasso:picasso:2.71828') {
+        exclude group: 'com.android.support'
+        exclude module: ['exifinterface', 'support-annotations']
+    }
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'

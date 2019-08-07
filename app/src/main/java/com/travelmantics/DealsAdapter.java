@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -18,6 +19,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
@@ -26,6 +28,7 @@ public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.DealViewHold
     private DatabaseReference mFirebaseReference;
     ArrayList<TravelDeal> mDeals;
     private ChildEventListener mChildEventListener;
+    private ImageView  imageDeal;
 
     public DealsAdapter(){
 
@@ -104,6 +107,8 @@ public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.DealViewHold
             super(itemView);
             tvTitle = itemView.findViewById(R.id.txt_title);
             tvDescription = itemView.findViewById(R.id.txt_description);
+
+            imageDeal= itemView.findViewById(R.id.image);
             tvPrice = itemView.findViewById(R.id.txt_price);
             //set an item click listener on the itemView
              itemView.setOnClickListener(this);
@@ -114,6 +119,7 @@ public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.DealViewHold
              tvTitle.setText(deal.getTitle());
              tvDescription.setText(deal.getDescription());
             tvPrice.setText(deal.getPrice());
+            showImage(deal.getImageUrl());
          }
 
         @Override
@@ -127,5 +133,17 @@ public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.DealViewHold
             //we need to call the startActivity method from the context of the current view
             view.getContext().startActivity(intent);
         }
+
+        private void showImage(String url){
+             if(url!=null && url.isEmpty()==false){
+                 Picasso.get()
+                         .load(url)
+                         .resize(160, 160)
+                         .centerCrop()
+                         .into(imageDeal);
+             }
+        }
     }
+
+
 }

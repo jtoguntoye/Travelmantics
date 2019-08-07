@@ -194,11 +194,13 @@ public class DealActivity extends AppCompatActivity {
             menu.findItem(R.id.delete_deal).setVisible(true);
             menu.findItem(R.id.save_menu).setVisible(true);
             enableEditTexts(true);
+            findViewById(R.id.btnImage).setEnabled(true);
         }
         else{
             menu.findItem(R.id.delete_deal).setVisible(false);
             menu.findItem(R.id.save_menu).setVisible(false);
             enableEditTexts(false);
+            findViewById(R.id.btnImage).setEnabled(false);
         }
 
 

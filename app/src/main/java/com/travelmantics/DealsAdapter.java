@@ -123,7 +123,8 @@ public class DealsAdapter extends RecyclerView.Adapter<DealsAdapter.DealViewHold
          }
 
         @Override
-        public void onClick(View view) {
+        public void onClick(View view)
+        {
             //get the position of the item clicked
             int position  = getAdapterPosition();
             Log.d("Click:", String.valueOf(position));

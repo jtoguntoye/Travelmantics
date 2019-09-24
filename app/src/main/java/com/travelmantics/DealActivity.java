@@ -18,7 +18,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.firebase.ui.auth.data.model.Resource;
+
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
@@ -27,6 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
+
 
 public class DealActivity extends AppCompatActivity {
 
@@ -135,7 +136,7 @@ public class DealActivity extends AppCompatActivity {
     private void deleteDeal() {
         if(deal == null){
             Toast.makeText(this, "You have to make a deal first before you can delete",
-                    Toast.LENGTH_LONG).show();;
+                    Toast.LENGTH_LONG).show();
         }
         mDatabaseReference.child(deal.getID())
                 .removeValue();
